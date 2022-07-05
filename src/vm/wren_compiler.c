@@ -2993,9 +2993,12 @@ static void loopBody(Compiler* compiler)
 // we know where the end of the loop is.
 static void endLoop(Compiler* compiler)
 {
-  // We don't check for overflow here since the forward jump over the loop body
-  // will report an error for the same problem.
+  // We need to check for overflow here since there are moe instructions
+  // for the loopback jump over the entire loop
+  // than the forward jump over the loop body.
   int loopOffset = compiler->fn->code.count - compiler->loop->start + 2;
+  if (loopOffset > MAX_JUMP)
+    error(compiler, "Too much code to jump over.");
   emitShortArg(compiler, CODE_LOOP, loopOffset);
 
   patchJump(compiler, compiler->loop->exitJump);
