@@ -45,7 +45,7 @@ foreign class Random {
 
   foreign int()
   int(end) { (float() * end).floor }
-  int(start, end) { (float() * (end - start)).floor + start }
+  int(start, end) { (float() * (end - start) + start).floor }
 
   sample(list) {
     if (list.count == 0) Fiber.abort("Not enough elements to sample.")

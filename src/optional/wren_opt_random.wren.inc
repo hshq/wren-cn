@@ -47,7 +47,7 @@ static const char* randomModuleSource =
 "\n"
 "  foreign int()\n"
 "  int(end) { (float() * end).floor }\n"
-"  int(start, end) { (float() * (end - start)).floor + start }\n"
+"  int(start, end) { (float() * (end - start) + start).floor }\n"
 "\n"
 "  sample(list) {\n"
 "    if (list.count == 0) Fiber.abort(\"Not enough elements to sample.\")\n"
